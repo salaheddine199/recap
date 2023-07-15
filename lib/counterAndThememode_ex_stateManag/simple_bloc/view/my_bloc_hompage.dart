@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:recap_awdi/simple_bloc/bloc/cubit.dart';
-import 'package:recap_awdi/simple_bloc/bloc/states.dart';
+import '../bloc/cubit.dart';
+import '../bloc/states.dart';
 
 class MyBlocHomePage extends StatelessWidget {
   const MyBlocHomePage({super.key});

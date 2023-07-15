@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'bloc/cubit/bloc_observer.dart';
-import 'section_345/messenger_design.dart';
+import 'bloc_with_sqflite/cubit/bloc_observer.dart';
+import 'section345_design/messenger_design.dart';
 
 
 void main() {

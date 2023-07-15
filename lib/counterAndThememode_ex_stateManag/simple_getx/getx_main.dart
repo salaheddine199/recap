@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:recap_awdi/simple_getx/my_getx.dart';
+import 'my_getx.dart';
 import 'cache_helper.dart';
 
 void main() async {
