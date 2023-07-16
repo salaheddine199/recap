@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-//! Nothing here, go to folders, each folder has its main.
-
 void main() {
   runApp(const MyApp());
 }
