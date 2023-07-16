@@ -31,8 +31,7 @@ class MyHomePage extends StatelessWidget {
     return GetBuilder<MyGetx>(
       init: _getx,
       builder: (ctx) =>MaterialApp(
-      title: 'SimpleProvider',
-      // themeMode: Provider.of<MyProvider>(context).themeMode, // both of these methods work.
+      title: 'SimpleGetx',
       themeMode: //ThemeMode.light,
        _getx.isLight
           ? ThemeMode.light
@@ -41,7 +40,7 @@ class MyHomePage extends StatelessWidget {
       darkTheme: ThemeData(canvasColor: Colors.blueGrey),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Provider Simple"),
+          title: const Text("Getx Simple"),
         ),
         body: Center(
           child: Column(
