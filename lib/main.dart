@@ -6,7 +6,7 @@ import 'section345_design/messenger_design.dart';
 void main() {
   Bloc.observer = MyBlocObserver();
 
-  runApp(const MyApp());c
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
