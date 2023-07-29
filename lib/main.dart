@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recap_awdi/cubit/news_cubit.dart';
+import 'package:recap_awdi/shared/bloc_observer.dart';
+import 'package:recap_awdi/shared/network/dio_helper.dart';
+import 'layout/news_layout.dart';
+import 'shared/network/cache_helper.dart';
 
-void main() {
+import 'shared/styles/themes.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+  DioHelper.init();
+  await CacheHelper.init();
+
   runApp(const MyApp());
 }
 
@@ -10,65 +23,34 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Api Flutter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: null,
-    );
-  }
-}
-
-
-
-
-
-
-/*
-  //give focus and remove it from TextField and also remove Keyboard
-
-
-import 'package:flutter/material.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: YourPage(),
-    );
-  }
-}
-class YourPage extends StatelessWidget {
-
-  FocusNode focusNode = new FocusNode();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextField(
-              focusNode: focusNode,
+    return BlocProvider(
+      create: (BuildContext context) => NewsCubit()..getCurrentScreen(),
+      //? replacing the below with the above, fetch the data not all at one time
+      //? if you want to reverse it, don't forget to delete the getCurrentScreen function
+      //? as well as , the code that refresh in cubit.changeBottomNavBar function
+      // ..getSportsData()
+      // ..getHealthData()
+      // ..getTechData()
+      child: BlocConsumer<NewsCubit, NewsState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Api Flutter',
+            themeMode:
+                CacheHelper.getDarkMode() ? ThemeMode.dark : ThemeMode.light,
+            darkTheme: darkTheme,
+            theme: lightTheme,
+            home: Directionality(
+              textDirection: CacheHelper.getEnglishLanguage()
+                  ? TextDirection.ltr
+                  : TextDirection.rtl,
+              // textDirection: TextDirection.rtl,
+              child: const NewsLayout(),
             ),
-            SizedBox(height: 10,),
-            RaisedButton(child: Text("UP"),onPressed: (){
-              FocusScope.of(context).requestFocus(focusNode);
-            },),
-            SizedBox(height: 10,),
-            RaisedButton(child: Text("DOWN"),onPressed: (){
-              focusNode.unfocus();
-            },),
-          ],
-        )
+          );
+        },
+      ),
     );
   }
-
-}*/
+}
